@@ -2,6 +2,8 @@ package com.example.demo.personalData;
 
 import com.example.demo.olympiads.OlympiadForm;
 import com.example.demo.users.User;
+import com.example.demo.users.UserRepository;
+import com.example.demo.users.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,12 @@ public class PersonalDataController {
     }
 
     @GetMapping("/form")
-    public String getForm(Model model) {
-        model.addAttribute("personalData", new PersonalData());
-        return "personal-data";
+    public String getForm(Model model, @AuthenticationPrincipal User user) {
+        if (user.isFirstLogin()) {
+            model.addAttribute("personalData", new PersonalData());
+            return "personal-data";
+        }
+        return "index";
     }
 
     @PostMapping
