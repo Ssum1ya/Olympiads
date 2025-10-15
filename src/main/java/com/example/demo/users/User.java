@@ -49,6 +49,18 @@ public class User implements UserDetails {
     }
 
     @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isFirstLogin=" + isFirstLogin +
+                ", personalData=" + personalData +
+                ", olympiadForm=" + olympiadForm +
+                '}';
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();
     }

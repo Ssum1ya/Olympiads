@@ -49,6 +49,7 @@ public class AuthController {
 
         user.setOlympiadForm(olympiadForm);
         user.setPersonalData(personalData);
+
         userRepository.save(user);
         return "redirect:/login";
     }

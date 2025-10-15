@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping("/personal_data")
 public class PersonalDataController {
@@ -26,7 +24,7 @@ public class PersonalDataController {
     }
 
     @PostMapping
-    public String printForm(Model model, @ModelAttribute("personalData") PersonalData personalData, @AuthenticationPrincipal User user) {
+    public String saveForm(Model model, @ModelAttribute("personalData") PersonalData personalData, @AuthenticationPrincipal User user) {
         personalData.setUser(user);
         personalDataService.savePersonalData(personalData);
         model.addAttribute("olympiad", new OlympiadForm());
