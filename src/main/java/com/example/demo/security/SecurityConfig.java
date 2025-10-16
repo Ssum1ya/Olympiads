@@ -26,6 +26,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .failureUrl("/loginError")
                         .defaultSuccessUrl("/personal_data/form", true)
                         .permitAll()
                 )

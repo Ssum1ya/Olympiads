@@ -26,6 +26,11 @@ public class AuthController {
         return "auth/login";
     }
 
+    @GetMapping("/loginError")
+    public String loginError() {
+        return "auth/errors/login-error";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         return "auth/login";
