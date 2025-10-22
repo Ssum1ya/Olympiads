@@ -25,14 +25,24 @@ public class PersonalDataController {
             model.addAttribute("personalData", new PersonalData());
             return "personal-data";
         }
-        return "index";
+        return "client-main-page.html";
     }
 
     @PostMapping
     public String saveForm(Model model, @ModelAttribute("personalData") PersonalData personalData, @AuthenticationPrincipal User user) {
         personalData.setUser(user);
         personalDataService.savePersonalData(personalData);
-        model.addAttribute("olympiad", new OlympiadForm());
-        return "olympiads-form";
+        if (user.isFirstLogin()) {
+            model.addAttribute("olympiad", new OlympiadForm());
+            return "olympiads-form";
+        }
+        return "client-main-page.html";
+    }
+
+    @GetMapping("/user-data")
+    public String getPersonalData(Model model, @AuthenticationPrincipal User user) {
+        PersonalData personalData = personalDataService.getPersonalDataByUser(user);
+        model.addAttribute("personalData", personalData);
+        return "personal-data";
     }
 }

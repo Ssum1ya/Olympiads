@@ -26,4 +26,8 @@ public class PersonalDataService {
 
         personalDataRepository.save(personalData);
     }
+
+    public PersonalData getPersonalDataByUser(User user) {
+        return personalDataRepository.findPersonalDataByUser(user);
+    }
 }

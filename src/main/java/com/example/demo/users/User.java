@@ -18,6 +18,8 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    @Transient
+    private String secondPassword;
     private boolean isFirstLogin = true;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -31,10 +33,11 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String username, String password, boolean isFirstLogin, PersonalData personalData, OlympiadForm olympiadForm) {
+    public User(Long id, String username, String password, String secondPassword, boolean isFirstLogin, PersonalData personalData, OlympiadForm olympiadForm) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.secondPassword = secondPassword;
         this.isFirstLogin = isFirstLogin;
         this.personalData = personalData;
         this.olympiadForm = olympiadForm;
@@ -123,5 +126,13 @@ public class User implements UserDetails {
 
     public void setOlympiadForm(OlympiadForm olympiadForm) {
         this.olympiadForm = olympiadForm;
+    }
+
+    public String getSecondPassword() {
+        return secondPassword;
+    }
+
+    public void setSecondPassword(String secondPassword) {
+        this.secondPassword = secondPassword;
     }
 }

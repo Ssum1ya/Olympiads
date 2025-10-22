@@ -44,6 +44,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, Model model) {
+        System.err.println(user.getSecondPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         OlympiadForm olympiadForm = new OlympiadForm();

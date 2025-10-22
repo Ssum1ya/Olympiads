@@ -29,6 +29,14 @@ public class OlympiadsController {
     public String printOlympiad(@ModelAttribute("olympiad") OlympiadForm olympiadForm, @AuthenticationPrincipal User user) {
         olympiadForm.setUser(user);
         olympiadService.saveOlympiadForm(olympiadForm);
-        return "index";
+        user.setFirstLogin(false);
+        return "client-main-page.html";
+    }
+
+    @GetMapping("/user-olympiads")
+    public String getOlympiadsByUser(Model model, @AuthenticationPrincipal User user) {
+        OlympiadForm olympiadForm = olympiadService.getOlympiadByUser(user);
+        model.addAttribute("olympiad", olympiadForm);
+        return "olympiads-form";
     }
 }
