@@ -26,7 +26,7 @@ public class OlympiadsController {
     }
 
     @PostMapping
-    public String printOlympiad(@ModelAttribute("olympiad") OlympiadForm olympiadForm, @AuthenticationPrincipal User user) {
+    public String saveOlympiad(@ModelAttribute("olympiad") OlympiadForm olympiadForm, @AuthenticationPrincipal User user) {
         olympiadForm.setUser(user);
         olympiadService.saveOlympiadForm(olympiadForm);
         user.setFirstLogin(false);
