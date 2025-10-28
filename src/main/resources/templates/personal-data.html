@@ -20,18 +20,30 @@
         <h2 class="">Заполните данные</h2>
         <div class="form-floating">
             <input type="text" th:field="*{surname}" class="form-control" name="surname" th:value="${personalData.surname}"> <br>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('surname')}"
+                  th:errors="*{surname}">Surname Error</span>
             <label>Введите фамилию</label>
         </div>
         <div class="form-floating">
             <input type="text" th:field="*{name}" class="form-control" name="name" th:value="${personalData.name}"> <br>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Name Error</span>
             <label >Введите имя</label>
         </div>
         <div class="form-floating">
             <input type="text" th:field="*{lastName}" class="form-control" name="lastName" th:value="${personalData.lastName}"> <br>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}">lastName Error</span>
             <label >Введите отчество</label>
         </div>
         <div class="form-floating">
             <input type="text" th:field="*{classNumber}" class="form-control" name="class" th:value="${personalData.classNumber}"> <br>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('classNumber')}"
+                  th:errors="*{classNumber}">classNumber Error</span>
             <label  class="form-label">Введите класс</label>
         </div>
         <div>

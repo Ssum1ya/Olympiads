@@ -4,9 +4,11 @@ import com.example.demo.olympiads.OlympiadForm;
 import com.example.demo.users.User;
 import com.example.demo.users.UserRepository;
 import com.example.demo.users.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,7 +31,10 @@ public class PersonalDataController {
     }
 
     @PostMapping
-    public String saveForm(Model model, @ModelAttribute("personalData") PersonalData personalData, @AuthenticationPrincipal User user) {
+    public String saveForm(Model model, @ModelAttribute("personalData") @Valid PersonalData personalData, Errors errors, @AuthenticationPrincipal User user) {
+        if (errors.hasErrors()) {
+            return "personal-data";
+        }
         personalData.setUser(user);
         personalDataService.savePersonalData(personalData);
         if (user.isFirstLogin()) {
