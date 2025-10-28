@@ -17,11 +17,12 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "username is required")
+    @NotBlank(message = "логин должен быть не пустой")
     private String username;
-    @NotBlank(message = "password is required")
+    @NotBlank(message = "1 пароль должен быть не пустой")
     private String password;
     @Transient
+    @NotBlank(message = "2 пароль должен быть не пустой")
     private String secondPassword;
     private boolean isFirstLogin = true;
 

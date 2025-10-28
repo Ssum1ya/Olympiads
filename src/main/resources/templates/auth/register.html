@@ -30,6 +30,7 @@
         <div class="form-floating">
             <input type="password" id="secondPassword" class="form-control" th:field="*{secondPassword}" name="secondPassword" placeholder="secondPassword" required> <br>
             <label for="secondPassword">Password</label>
+            <span th:if="${passwordError}" th:text="'Пароли не совпадают'"></span>
         </div>
         <button class="w-100 btn btn-log btn-primary" type="submit">Register</button>
     </form>

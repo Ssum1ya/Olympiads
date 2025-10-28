@@ -4,10 +4,12 @@ import com.example.demo.olympiads.OlympiadForm;
 import com.example.demo.personalData.PersonalData;
 import com.example.demo.users.User;
 import com.example.demo.users.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +45,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") User user, Model model) {
-        System.err.println(user.getSecondPassword());
+    public String register(@ModelAttribute("user") User user, Errors errors, Model model) {
+        if (!user.getPassword().equals(user.getSecondPassword())) {
+            model.addAttribute("passwordError", true);
+            return "auth/register";
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         OlympiadForm olympiadForm = new OlympiadForm();
