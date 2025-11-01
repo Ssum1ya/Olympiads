@@ -20,7 +20,6 @@ public class PersonalDataService {
         personalData.setId(personalDataDB.getId());
         personalData.setUser(personalDataDB.getUser());
 
-        User newUser = personalData.getUser();
         userRepository.save(personalData.getUser());
 
         personalDataRepository.save(personalData);

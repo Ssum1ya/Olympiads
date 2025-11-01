@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class PersonalDataController {
 
     private final PersonalDataService personalDataService;
+    private final UserRepository userRepository;
 
-    public PersonalDataController(PersonalDataService personalDataService) {
+    public PersonalDataController(PersonalDataService personalDataService, UserRepository userRepository) {
         this.personalDataService = personalDataService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/form")
@@ -37,10 +39,13 @@ public class PersonalDataController {
         }
         personalData.setUser(user);
         personalDataService.savePersonalData(personalData);
-        if (user.isFirstLogin()) {
+
+        User userFromRepo = userRepository.findUserById(user.getId());
+        if (userFromRepo.isFirstLogin()) {
             model.addAttribute("olympiad", new OlympiadForm());
             return "olympiads-form";
         }
+
         return "client-main-page.html";
     }
 

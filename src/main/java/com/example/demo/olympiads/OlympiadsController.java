@@ -1,6 +1,7 @@
 package com.example.demo.olympiads;
 
 import com.example.demo.users.User;
+import com.example.demo.users.UserRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,6 @@ public class OlympiadsController {
     public String saveOlympiad(@ModelAttribute("olympiad") OlympiadForm olympiadForm, @AuthenticationPrincipal User user) {
         olympiadForm.setUser(user);
         olympiadService.saveOlympiadForm(olympiadForm);
-        user.setFirstLogin(false);
         return "client-main-page.html";
     }
 
